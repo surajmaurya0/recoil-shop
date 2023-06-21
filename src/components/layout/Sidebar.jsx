@@ -1,6 +1,12 @@
 import React from 'react'
+import { useRecoilState } from 'recoil'
+import { listStyleProduct } from '../../recoil/listStyle'
 
 const Sidebar = () => {
+    const [listStyle, setListStyle] = useRecoilState(listStyleProduct)
+    const onChangeListStyle = (style) => {
+        setListStyle(style)
+    }
     return (
         <>
             <div className="columns is-multiline">
@@ -8,12 +14,12 @@ const Sidebar = () => {
                     <h2 className="subtitle">(144) products</h2>
                     <div className="field has-addons">
                         <div className="control">
-                            <button className="button is-dark">
+                            <button className={`button ${listStyle == 'is-6' ? 'is-dark' : ''}`} onClick={() => onChangeListStyle('is-6')}>
                                 <i className="fas fa-th-large"></i>
                             </button>
                         </div>
                         <div className="control">
-                            <button className="button">
+                            <button className={`button ${listStyle == 'is-4' ? 'is-dark' : ''}`} onClick={() => onChangeListStyle('is-4')}>
                                 <i className="fas fa-grip-horizontal"></i>
                             </button>
                         </div>

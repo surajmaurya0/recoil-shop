@@ -1,12 +1,16 @@
 import React from 'react'
-import Navbar from '../layout/Navbar'
 import Sidebar from '../layout/Sidebar'
 import Products from '../products/Products'
-
+import { useSetRecoilState } from 'recoil'
+import { NavbarRecoil } from '../../recoil/navbarRecoil'
 const Home = () => {
+const setUrl = useSetRecoilState(NavbarRecoil)
+const url = window.location.href;
+const productUrl = url.split('/').pop()
+setUrl(productUrl)
   return (
     <>
-   <Navbar/>
+   
     <div className="has-background-light">
         <div className="container">
             <div className="section">
