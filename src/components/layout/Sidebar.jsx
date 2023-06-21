@@ -1,17 +1,35 @@
-import React from 'react'
-import { useRecoilState } from 'recoil'
+import React, { useState } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { listStyleProduct } from '../../recoil/listStyle'
+import { productsState } from '../../recoil/productRecoil'
 
 const Sidebar = () => {
     const [listStyle, setListStyle] = useRecoilState(listStyleProduct)
+    const [searchInput,setSearchInput] = useState()
+    const [product,setProduct] = useRecoilState(productsState)
     const onChangeListStyle = (style) => {
         setListStyle(style)
     }
+   const searchProduct= (e)=>{
+    setSearchInput(e.target.value)
+    // let pdname =product.filter((pd)=>{return pd.name=== "a"})
+    // console.log(pdname);
+    // if (product && product.name && e) {
+        // const searchResult = product.name.toLowerCase().indexOf(e.toLowerCase());
+      
+        // console.log(searchResult);
+    //   } else {
+    //     console.log("Product or search input is undefined.");
+    //   }
+    setTimeout(()=>{
+        console.log(searchInput)
+    },1000)
+   }
     return (
         <>
             <div className="columns is-multiline">
                 <div className="column is-12">
-                    <h2 className="subtitle">(144) products</h2>
+                    <h2 className="subtitle">{product.length} Products</h2>
                     <div className="field has-addons">
                         <div className="control">
                             <button className={`button ${listStyle == 'is-6' ? 'is-dark' : ''}`} onClick={() => onChangeListStyle('is-6')}>
@@ -25,7 +43,7 @@ const Sidebar = () => {
                         </div>
                     </div>
                     <h3 className="subtitle is-6 mb-2">Search Products</h3>
-                    <input type="text" className="input" placeholder='Search Your Products' />
+                    <input type="text" className="input" placeholder='Search Your Products' value={searchInput} onChange={(e)=> searchProduct(e)} />
                 </div>
                 <div className="column is-12">
                     <h3 className="subtitle is-6 mb-2">Filter</h3>
