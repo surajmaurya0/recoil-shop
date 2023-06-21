@@ -12,18 +12,14 @@ const Sidebar = () => {
     }
    const searchProduct= (e)=>{
     setSearchInput(e.target.value)
-    // let pdname =product.filter((pd)=>{return pd.name=== "a"})
-    // console.log(pdname);
-    // if (product && product.name && e) {
-        // const searchResult = product.name.toLowerCase().indexOf(e.toLowerCase());
-      
-        // console.log(searchResult);
-    //   } else {
-    //     console.log("Product or search input is undefined.");
-    //   }
-    setTimeout(()=>{
-        console.log(searchInput)
-    },1000)
+    if(e.target.value === ""){
+        setProduct(product)
+    }else{
+        let pdname =product.filter((pd)=>{return pd.name.toLowerCase().includes(e.target.value)})
+        setTimeout(()=>{
+            setProduct(pdname)
+        },500)
+    }
    }
     return (
         <>
