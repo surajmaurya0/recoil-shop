@@ -3,6 +3,7 @@ import { productsState } from '../../recoil/productRecoil'
 import { useSetRecoilState } from 'recoil'
 import { NavbarRecoil } from '../../recoil/navbarRecoil'
 import { useNavigate } from 'react-router-dom'
+import shortid from 'shortid'
 
 const AddProduct = () => {
   const navigate = useNavigate()
@@ -13,12 +14,13 @@ const AddProduct = () => {
     name: '',
     price: '',
     picture: '',
-    type: ''
+    type: '',
+    id:shortid.generate()
   })
   setUrl('add-product')
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log(addProduct)
+    
     setAddNewProduct((oldProduct) => [...oldProduct, addProduct])
     setLoading(true)
     setTimeout(() => {
@@ -27,7 +29,7 @@ const AddProduct = () => {
     }, 5000)
 
   }
-
+  console.log(addProduct)
   return (
     <>
       {loading ? <>
@@ -69,7 +71,8 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-      </> : <div className="container">
+      </> : 
+      <div className="container">
         <div className="section">
           <div className="card">
             <div className="card-header">

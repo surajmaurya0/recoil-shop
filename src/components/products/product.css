@@ -38,3 +38,10 @@
     right:-100px;
     border-bottom-left-radius: 30px;
 }
+.modal-centered{
+    display: flex;
+    justify-content: center;
+}
+.box-shadow-remove{
+    box-shadow: none;
+}

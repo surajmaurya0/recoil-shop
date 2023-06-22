@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { productsState } from '../../recoil/productRecoil'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import'./product.css'
 import ProductItem from './ProductItem'
+import { filterState } from '../../recoil/filterRecoil'
 const Products = () =>{
+    const[filterData,setFilterData] = useRecoilState(filterState)
    const  products = useRecoilValue(productsState)
-   console.log(products)
     return(
         <>
         <div className="columns is-multiline">
             {
-                products.map((product)=> <ProductItem product={product}/> )
+                filterData.map((product)=> (<ProductItem product={product} setFilterData={setFilterData} filterData={filterData} key={product.id}/>) )
+                // <ProductItem setFilterData={setFilterData} filterData={filterData}/>
             }
         </div>
         </>
