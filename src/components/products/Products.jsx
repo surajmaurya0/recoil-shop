@@ -1,21 +1,32 @@
-import React, { useState } from 'react'
-import { productsState } from '../../recoil/productRecoil'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import'./product.css'
-import ProductItem from './ProductItem'
-import { filterState } from '../../recoil/filterRecoil'
-const Products = () =>{
-    const[filterData,setFilterData] = useRecoilState(filterState)
-   const  products = useRecoilValue(productsState)
-    return(
+import React, { useEffect, useState } from 'react';
+import { productsState } from '../../recoil/productRecoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import './product.css';
+import ProductItem from './ProductItem';
+import { filterState } from '../../recoil/filterRecoil';
+
+const Products = () => {
+    const filterData = useRecoilValue(filterState);
+    const [keyCounter, setKeyCounter] = useState(0);
+
+    useEffect(() => {
+        console.log("product", filterData);
+        setKeyCounter(prevCounter => prevCounter + 1);
+    }, [filterData]);
+
+    return (
         <>
-        <div className="columns is-multiline">
-            {
-                filterData.map((product)=> (<ProductItem product={product} setFilterData={setFilterData} filterData={filterData} key={product.id}/>) )
-                // <ProductItem setFilterData={setFilterData} filterData={filterData}/>
-            }
-        </div>
+            <div className="columns is-multiline">
+                {filterData.map((product, index) => (
+                    <ProductItem
+                        product={product}
+                        filterData={filterData}
+                        key={`${product.id}-${keyCounter}-${index}`}
+                    />
+                ))}
+            </div>
         </>
-    )
-}
-export default Products
+    );
+};
+
+export default Products;

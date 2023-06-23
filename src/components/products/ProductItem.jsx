@@ -4,6 +4,7 @@ import { listStyleProduct } from '../../recoil/listStyle'
 import { productsState } from '../../recoil/productRecoil'
 import { filterState } from '../../recoil/filterRecoil'
 const ProductItem = (props) => {
+    const setFilterData = useSetRecoilState(filterState);
     const { name, picture, price, type, id } = props.product
     const [editData, setEditData] = useState({
         name: name,
@@ -30,16 +31,30 @@ const ProductItem = (props) => {
 
         setModal({ ...modal, edit: 'is-active' })
     }
+    // const editProduct = () => {
+    //     const editDataUpdate = deleteProductStateData.findIndex(data => data.id === id);
+    //     if (editDataUpdate !== -1) {
+    //         const updatedDeleteProductStateData = [...deleteProductStateData];
+    //         updatedDeleteProductStateData[editDataUpdate] = editData;
+            
+    //         setDeleteProductStateData(updatedDeleteProductStateData);
+    //         console.log(updatedDeleteProductStateData)
+    //     }
+    //     setModal('')
+    // }
     const editProduct = () => {
-        const editDataUpdate = deleteProductStateData.findIndex(data => data.id === id);
-        if (editDataUpdate !== -1) {
-            const updatedDeleteProductStateData = [...deleteProductStateData];
-            updatedDeleteProductStateData[editDataUpdate] = editData;
-            setDeleteProductStateData(updatedDeleteProductStateData);
-            console.log(updatedDeleteProductStateData)
-        }
-        setModal('')
-    }
+        setDeleteProductStateData(previousState => {
+            return previousState.map(item => {
+                if (item.id === id) {
+                    return editData;
+                }
+                return item;
+            });
+        });
+        setModal({ ...modal, edit: '' });
+    };
+    
+    
     return (
         <>
             <div className={`column ${listStyle} has-text-centered`} key={id}>

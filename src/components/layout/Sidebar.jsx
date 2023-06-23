@@ -20,7 +20,7 @@ const Sidebar = () => {
         setSearchInput({ ...searchInput, search: e.target.value.trim().length < 1 ? null : e.target.value })
         if (e.target.value === "" || searchInput.search === null) {
             resetState()
-        } else {
+        } else{
             let pdname = filterData.filter((pd) => { return pd.name.toLowerCase().includes(e.target.value) })
             setTimeout(() => {
                 setFilterData(pdname)
