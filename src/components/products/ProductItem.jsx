@@ -56,7 +56,7 @@ const ProductItem = (props) => {
                 <div class="modal-background"></div>
                 <div class="modal-card">
                     <header class="modal-card-head">
-                        <p class="modal-card-title">Delete Product</p>
+                        <p class="modal-card-title"> 😳Are You Sure To Delete The Product</p>
                         <button class="delete" aria-label="close" onClick={() => setModal({ ...modal, delete: '' })}></button>
                     </header>
                     <section class="modal-card-body ">

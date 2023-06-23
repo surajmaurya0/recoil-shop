@@ -16,7 +16,7 @@ const Sidebar = () => {
         <>
             <div className="columns is-multiline">
                 <div className="column is-12">
-                    <h2 className="subtitle">{filterCountvalue} Products</h2>
+                    <h2 className="subtitle "><strong className='has-text-dark'>{filterCountvalue} Products </strong></h2>
                     <div className="field has-addons">
                         <div className="control">
                             <button className={`button ${listStyle == 'is-6' ? 'is-dark' : ''}`} onClick={() => onChangeListStyle('is-6')}>
