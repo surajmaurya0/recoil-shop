@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { productsState } from '../../recoil/productRecoil'
 import { useSetRecoilState } from 'recoil'
 import { NavbarRecoil } from '../../recoil/navbarRecoil'

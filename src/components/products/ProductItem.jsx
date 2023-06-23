@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import React, { useState } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { listStyleProduct } from '../../recoil/listStyle'
 import { productsState } from '../../recoil/productRecoil'
-import { filterState } from '../../recoil/filterRecoil'
 const ProductItem = (props) => {
-    const setFilterData = useSetRecoilState(filterState);
     const { name, picture, price, type, id } = props.product
     const [editData, setEditData] = useState({
         name: name,
@@ -17,12 +15,11 @@ const ProductItem = (props) => {
         delete: false,
         edit: false
     })
-    const [deleteProductStateData, setDeleteProductStateData] = useRecoilState(filterState)
+    const [deleteProductStateData, setDeleteProductStateData] = useRecoilState(productsState)
     const listStyle = useRecoilValue(listStyleProduct)
     const deleteProduct = (id) => {
         const deleteData = deleteProductStateData.filter((pd) => { return pd.id !== id })
-        setDeleteProductStateData(deleteData)
-        console.log(deleteData);
+        setDeleteProductStateData(deleteData);
     }
     const deleteProductModal = () => {
         setModal({ ...modal, delete: 'is-active' })
@@ -31,17 +28,6 @@ const ProductItem = (props) => {
 
         setModal({ ...modal, edit: 'is-active' })
     }
-    // const editProduct = () => {
-    //     const editDataUpdate = deleteProductStateData.findIndex(data => data.id === id);
-    //     if (editDataUpdate !== -1) {
-    //         const updatedDeleteProductStateData = [...deleteProductStateData];
-    //         updatedDeleteProductStateData[editDataUpdate] = editData;
-            
-    //         setDeleteProductStateData(updatedDeleteProductStateData);
-    //         console.log(updatedDeleteProductStateData)
-    //     }
-    //     setModal('')
-    // }
     const editProduct = () => {
         setDeleteProductStateData(previousState => {
             return previousState.map(item => {
@@ -103,7 +89,6 @@ const ProductItem = (props) => {
                                 <div className="card box-shadow-remove">
 
                                     <div className="card-content">
-                                        {/* <form onSubmit={editProduct}> */}
                                         <div className="columns">
                                             <div className="column is-3">
                                                 <input type="text" className="input" value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })} placeholder='Enter Product Name' />
@@ -127,8 +112,6 @@ const ProductItem = (props) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* <button className="button is-primary" type='submit' >Edit</button> */}
-                                        {/* </form> */}
                                     </div>
                                 </div>
                             </div>
