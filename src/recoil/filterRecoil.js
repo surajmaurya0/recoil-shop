@@ -10,7 +10,7 @@ export const filterProduct = selector({
         const searchText = get(searchDataText)
         const filterItem = get(productFilterByType)
         let filterProductState = [];
-        filterProductState = product.filter((product) => product.name.toLowerCase().includes(searchText)).filter((product) => filterItem == "" ? true:product.type == filterItem)
+        filterProductState = product.filter((product) => product.name.toLowerCase().includes(searchText.toLowerCase())).filter((product) => filterItem == "" ? true:product.type == filterItem)
         return filterProductState
     }
 })
